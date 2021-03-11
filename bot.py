@@ -2,6 +2,7 @@ from loader import bot, dp
 from aiogram import executor
 from aiogram.types import CallbackQuery, Message
 from aiogram import Dispatcher
+from aiogram.types import ContentType
 
 import buttons
 
@@ -108,8 +109,9 @@ async def iw_handler(callback: CallbackQuery):
     await global_state.set_data(gdata)
 
 
-@dp.message_handler(state='CHAT')
+@dp.message_handler(state='CHAT', content_types=[ContentType.ANY])
 async def chat_handler(message: Message):
+    print(1)
     state = dp.current_state()
     uid = await state.get_data()
     uid = uid['link']
